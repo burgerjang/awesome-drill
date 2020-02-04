@@ -1,22 +1,9 @@
-``` bash
-     ___   ____    __    ____  _______     _______.  ______   .___  ___.  _______ 
-    /   \  \   \  /  \  /   / |   ____|   /       | /  __  \  |   \/   | |   ____|
-   /  ^  \  \   \/    \/   /  |  |__     |   (----`|  |  |  | |  \  /  | |  |__   
-  /  /_\  \  \            /   |   __|     \   \    |  |  |  | |  |\/|  | |   __|  
- /  _____  \  \    /\    /    |  |____.----)   |   |  `--'  | |  |  |  | |  |____ 
-/__/     \__\  \__/  \__/     |_______|_______/     \______/  |__|  |__| |_______|
-                                                                                  
- _______  .______       __   __       __          __  
-|       \ |   _  \     |  | |  |     |  |        |  | 
-|  .--.  ||  |_)  |    |  | |  |     |  |        |  | 
-|  |  |  ||      /     |  | |  |     |  |        |  | 
-|  '--'  ||  |\  \----.|  | |  `----.|  `----.   |__| 
-|_______/ | _| `._____||__| |_______||_______|   (__) 
-                                                      
+### Awesome-Drill
 
-```
-## Awesome-drill will make your linux fine easy!!!
-## Let's Do this
+## Awesome-Drill (`command ad`) will make your linux fine easy!!!
+awesome-drill can install available packages in Linux. Use only `ad` command for using it!!
+
+## Let's Get it
 
 
 ``` bash
@@ -24,9 +11,10 @@ git clone --depth 1 https://github.com/burgerjang/awesome-drill.git ~/.ad
 mv ~/.ad/awesome-drill /usr/local/bin/ad
 ```
 
-## Use
+## How to use
 ``` bash
 $ ad
+
      ___   ____    __    ____  _______     _______.  ______   .___  ___.  _______ 
     /   \  \   \  /  \  /   / |   ____|   /       | /  __  \  |   \/   | |   ____|
    /  ^  \  \   \/    \/   /  |  |__     |   (----`|  |  |  | |  \  /  | |  |__   
@@ -41,15 +29,14 @@ $ ad
 |  '--'  ||  |\  \----.|  | |  `----.|  `----. |__| 
 |_______/ | _| `._____||__| |_______||_______| (__) 
                                                    
-| ============================================================= |
-| Install all your application in linux for using drill-down!!! |
-| ============================================================= |
+| ============================================================== |
+| Install & drill down your packages for using awesome drill !!! |
+| ============================================================== |
 >                                                                                                                                                           
   6/6                                                                                                                                                       
-> go                                                                                                                                                        
-  terraform                                                                                                                                                 
-  aws-cli                                                                                                                                                   
-  aws-iam-authenticator                                                                                                                                     
-  nodejs                                                                                                                                                    
-  npm
+> go                                        
+  terraform
+  aws-cli
+  aws-iam-authenticator
+  nodejs
 ```
