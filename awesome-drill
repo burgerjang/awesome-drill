@@ -25,10 +25,10 @@ terraform_dd() {
     if [ $? -eq 1 ]; then
         sudo apt-get -y install unzip
     fi
-	curl -X GET https://www.terraform.io/downloads.html 2>/dev/null | grep "\.\zip" | grep "terraform" > tf_list
 
 	command -v terraform
 	if [ $? -eq 1 ]; then
+		curl -X GET https://www.terraform.io/downloads.html 2>/dev/null | grep "\.\zip" | grep "terraform" > tf_list
 	    if [ ${FZF} == "true" ]; then
 	       	while read -r line; do
 	           	echo ${line} | awk -F'"' '{print $2}' | awk -F'"' '{print $1}'
@@ -105,8 +105,11 @@ aws-cli_dd () {
         pip3 --version
         pip3 install awscli --upgrade --user
     else
-        pip3 --version
-        pip3 install awscli --upgrade --user
+		command -v aws > /dev/null
+		if [ $? -eq 1 ]; then
+	        pip3 --version
+    	    pip3 install awscli --upgrade --user
+		fi
     fi
 	rm -rf get-pip.py
 }

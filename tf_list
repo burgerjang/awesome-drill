@@ -1,0 +1,12 @@
+              <li><a href="https://releases.hashicorp.com/terraform/0.12.20/terraform_0.12.20_darwin_amd64.zip">64-bit</a></li>
+              <li><a href="https://releases.hashicorp.com/terraform/0.12.20/terraform_0.12.20_freebsd_386.zip">32-bit</a></li>
+              <li><a href="https://releases.hashicorp.com/terraform/0.12.20/terraform_0.12.20_freebsd_amd64.zip">64-bit</a></li>
+              <li><a href="https://releases.hashicorp.com/terraform/0.12.20/terraform_0.12.20_freebsd_arm.zip">Arm</a></li>
+              <li><a href="https://releases.hashicorp.com/terraform/0.12.20/terraform_0.12.20_linux_386.zip">32-bit</a></li>
+              <li><a href="https://releases.hashicorp.com/terraform/0.12.20/terraform_0.12.20_linux_amd64.zip">64-bit</a></li>
+              <li><a href="https://releases.hashicorp.com/terraform/0.12.20/terraform_0.12.20_linux_arm.zip">Arm</a></li>
+              <li><a href="https://releases.hashicorp.com/terraform/0.12.20/terraform_0.12.20_openbsd_386.zip">32-bit</a></li>
+              <li><a href="https://releases.hashicorp.com/terraform/0.12.20/terraform_0.12.20_openbsd_amd64.zip">64-bit</a></li>
+              <li><a href="https://releases.hashicorp.com/terraform/0.12.20/terraform_0.12.20_solaris_amd64.zip">64-bit</a></li>
+              <li><a href="https://releases.hashicorp.com/terraform/0.12.20/terraform_0.12.20_windows_386.zip">32-bit</a></li>
+              <li><a href="https://releases.hashicorp.com/terraform/0.12.20/terraform_0.12.20_windows_amd64.zip">64-bit</a></li>
