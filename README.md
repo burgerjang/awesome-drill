@@ -1,4 +1,4 @@
-### Awesome-Drill
+# Awesome-Drill
 
 ## Awesome-Drill (`command ad`) will make your linux fine easy!!!
 awesome-drill can install available packages in Linux. Use only `ad` command for using it!!
