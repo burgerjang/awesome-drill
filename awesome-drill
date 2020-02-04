@@ -111,7 +111,7 @@ echo -e "| ============================================================= |"
 # main
 while :
 do
-	CMD_SELECTED=$(cat resources/cmd | fzf --reverse --no-mouse --height=15 --bind=left:page-up,right:page-down)
+	CMD_SELECTED=$(cat ~/.ad/resources/cmd | fzf --reverse --no-mouse --height=15 --bind=left:page-up,right:page-down)
 	if [ "${CMD_SELECTED}" == "" ]; then
 		break
 	else
