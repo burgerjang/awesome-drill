@@ -124,8 +124,11 @@ aws-iam-authenticator_dd () {
 }
 
 nodejs_dd() {
-	apt-get -y install nodejs
-	apt-get -y install npm
+	command -v node > /dev/null
+	if [ $? -eq 1 ]; then
+		apt-get -y install nodejs
+		apt-get -y install npm
+	fi
 }
 
 
