@@ -23,7 +23,7 @@ EOF
 terraform_dd() {
     command -v unzip > /dev/null
     if [ $? -eq 1 ]; then
-        apt-get -y install unzip
+        sudo apt-get -y install unzip
     fi
 	curl -X GET https://www.terraform.io/downloads.html 2>/dev/null | grep "\.\zip" | grep "terraform" > tf_list
 
@@ -92,6 +92,48 @@ go_dd() {
 	fi
 }
 
+aws-cli_dd () {
+	command -v pip3 > /dev/null
+	if [ $? -eq 1 ]; then
+		sudo apt -y install jq
+		sudo apt -y install python3
+		sudo apt -y install python3-distutils
+		curl -O https://bootstrap.pypa.io/get-pip.py 2>/dev/null 
+		python3 get-pip.py --user
+        echo "PATH=~/.local/bin:$PATH" >> ~/.bashrc
+        export PATH=~/.local/bin:$PATH
+        pip3 --version
+        pip3 install awscli --upgrade --user
+    else
+        pip3 --version
+        pip3 install awscli --upgrade --user
+    fi
+	rm -rf get-pip.py
+}
+
+aws-iam-authenticator_dd () {
+	command -v aws-iam-authenticator > /dev/null
+	if [ $? -eq 1 ]; then
+		curl -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.14.6/2019-08-22/bin/linux/amd64/aws-iam-authenticator 2>/dev/null
+		chmod +x ./aws-iam-authenticator
+		mv ./aws-iam-authenticator /usr/local/bin/aws-iam-authenticator
+	fi
+}
+
+nodejs_dd() {
+	apt-get -y install nodejs
+	apt-get -y install npm
+}
+
+
+
+
+
+
+
+
+
+
 
 # install fzf
 command -v fzf > /dev/null
@@ -119,34 +161,3 @@ do
 		${CMD_SELECTED}_dd
 	fi
 done
-
-# comment 
-: << 'END'
-
-curl -X GET https://www.terraform.io/downloads.html | grep "\.\zip" | grep "terraform" > tf_list
-
-CHECK_TERRAFORM=$(terraform 2>&1 > /dev/null)
-RESULT=$?
-
-if [ ! ${RESULT} -eq 0 ]; then
-	if [ ${FZF} == "true" ]; then
-		while read -r line; do
-			echo ${line} | awk -F'"' '{print $2}' | awk -F'"' '{print $1}'
-		done < tf_list | uniq  > list
-		SELECTED=$(cat list | fzf --reverse --no-mouse --height=15 --bind=left:page-up,right:page-down)
-	fi
-	ZIP_NAME=$(echo $SELECTED | awk -F'/' '{print $NF}')
-	echo $ZIP_NAME
-	wget $SELECTED
-	unzip $ZIP_NAME
-
-	chmod +x terraform
-	mv terraform /usr/local/bin
-
-	rm -rf tf_list
-	rm -rf list
-	rm -rf $ZIP_NAME
-fi
-END
-
-tput clear
