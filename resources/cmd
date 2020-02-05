@@ -3,3 +3,5 @@ terraform
 aws-cli
 aws-iam-authenticator
 nodejs
+java8
+maven

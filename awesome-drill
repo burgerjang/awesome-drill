@@ -21,9 +21,9 @@ cat  << 'EOF'
 EOF
 
 terraform_dd() {
-    command -v unzip > /dev/null
+    command -v zip > /dev/null
     if [ $? -eq 1 ]; then
-        sudo apt-get -y install unzip
+        sudo apt-get -y install zip
     fi
 
 	command -v terraform
@@ -131,9 +131,43 @@ nodejs_dd() {
 	fi
 }
 
+java8_dd() {
+	command -v java > /dev/null
+	if [ $? -eq 1 ]; then
+		apt-get -y install software-properties-common
+		add-apt-repository ppa:webupd8team/java
+		apt-get -y install openjdk-8-jdk openjdk-8-jre
+		export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre >> /etc/profile
+	fi
+	echo 'export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre' >> /etc/profile
+}
 
+maven_dd() {
+	command -v mvn > /dev/null
+	if [ $? -eq 1 ]; then
+		curl -X GET http://maven.apache.org/download.cgi 2>/dev/null | grep apache-maven | grep maven/maven-3 | grep -v sha | grep -v asc | grep bin | awk -F '"' '{print $2}' 2>/dev/null > maven_list
+		SELECTED_MAVEN_URL=$(cat maven_list | fzf --reverse --no-mouse --height=15 --bind=left:page-up,right:page-down)
+		SELECTED_MAVEN=$(echo $SELECTED_MAVEN_URL | awk -F'/' '{print $NF}')
+		wget $SELECTED_MAVEN_URL
+		rm -rf maven_list
 
+		mv $SELECTED_MAVEN /usr/local/
+		pushd /usr/local/
+		tar -xvf $SELECTED_MAVEN
+		popd
+		echo 'export M2_HOME=/usr/local/apache-maven-3.6.3' >> /etc/profile
+		echo 'export PATH=$PATH:$M2_HOME/bin' >> /etc/profile
+	fi
+}
 
+gradle_dd() {
+	command -v gradle > /dev/null
+	if [ $? -eq 1 ]; then
+		curl -s "https://get.sdkman.io" | bash
+		source "$HOME/.sdkman/bin/sdkman-init.sh"
+		sdk install gradle 5.2.1
+	fi
+}
 
 
 
