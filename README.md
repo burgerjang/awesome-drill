@@ -1,13 +1,13 @@
 # Awesome-Drill
 
-## Awesome-Drill (`command ad`) will make your linux fine easy!!!
-awesome-drill can install available packages in Linux. Use only `ad` command for using it!!
+## Awesome-Drill (`command ad`) will make your linux & Mac fine easy!!!
+awesome-drill can install available packages in Linux & Mac OS. Use only `ad` command for using it!!
 
 ## Let's Get it
 
 
 ``` bash
-git clone --depth 1 https://github.com/burgerjang/awesome-drill.git ~/.ad
+rm -rf ~/.ad && git clone --depth 1 https://github.com/burgerjang/awesome-drill.git ~/.ad
 mv ~/.ad/awesome-drill /usr/local/bin/ad
 ```
 
