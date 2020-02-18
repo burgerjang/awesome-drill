@@ -20,35 +20,50 @@ cat  << 'EOF'
                                                    
 EOF
 
-terraform_dd() {
-    command -v zip > /dev/null
-    if [ $? -eq 1 ]; then
-        sudo apt-get -y install zip
-    fi
+OS_NAME="$(uname | awk '{print tolower($0)}')"
 
-	command -v terraform
-	if [ $? -eq 1 ]; then
-		curl -X GET https://www.terraform.io/downloads.html 2>/dev/null | grep "\.\zip" | grep "terraform" > tf_list
-	    if [ ${FZF} == "true" ]; then
-	       	while read -r line; do
-	           	echo ${line} | awk -F'"' '{print $2}' | awk -F'"' '{print $1}'
-	       	done < tf_list | uniq  > list
-	       	SELECTED=$(cat list | fzf --reverse --no-mouse --height=15 --bind=left:page-up,right:page-down)
-			if [ ! ${SELECTED}  ]; then
-				return
-			else
-				ZIP_NAME=$(echo $SELECTED | awk -F'/' '{print $NF}')
-		        echo $ZIP_NAME
-		        wget $SELECTED
-		        unzip $ZIP_NAME
-		        chmod +x terraform
-		        mv terraform /usr/local/bin
-		        rm -rf tf_list
-		        rm -rf list
-		        rm -rf $ZIP_NAME
+terraform_dd() {
+	if [ "${OS_NAME}" == "linux" ]; then
+		command -v zip > /dev/null
+		if [ $? -eq 1 ]; then
+			sudo apt-get -y install zip
+		fi
+
+		command -v terraform
+		if [ $? -eq 1 ]; then
+			curl -X GET https://www.terraform.io/downloads.html 2>/dev/null | grep "\.\zip" | grep "terraform" > tf_list
+			if [ ${FZF} == "true" ]; then
+				while read -r line; do
+					echo ${line} | awk -F'"' '{print $2}' | awk -F'"' '{print $1}'
+				done < tf_list | uniq  > list
+				SELECTED=$(cat list | fzf --reverse --no-mouse --height=15 --bind=left:page-up,right:page-down)
+				if [ ! ${SELECTED}  ]; then
+					return
+				else
+					ZIP_NAME=$(echo $SELECTED | awk -F'/' '{print $NF}')
+					echo $ZIP_NAME
+					wget $SELECTED
+					unzip $ZIP_NAME
+					chmod +x terraform
+					mv terraform /usr/local/bin
+					rm -rf tf_list
+					rm -rf list
+					rm -rf $ZIP_NAME
+				fi
 			fi
-	    fi
+		fi
+	elif [ "${OS_NAME}" == "darwin" ]; then
+		command -v zip > /dev/null
+		if [ $? -eq 1 ]; then
+			brew install zip
+		fi
+
+		command -v terraform
+		if [ $? -eq 1 ]; then
+			brew install terraform
+		fi
 	fi
+    
 }
 
 go_dd() {
@@ -93,34 +108,44 @@ go_dd() {
 }
 
 aws-cli_dd () {
-	command -v pip3 > /dev/null
-	if [ $? -eq 1 ]; then
-		sudo apt -y install jq
-		sudo apt -y install python3
-		sudo apt -y install python3-distutils
-		curl -O https://bootstrap.pypa.io/get-pip.py 2>/dev/null 
-		python3 get-pip.py --user
-        echo "PATH=~/.local/bin:$PATH" >> ~/.bashrc
-        export PATH=~/.local/bin:$PATH
-        pip3 --version
-        pip3 install awscli --upgrade --user
-    else
-		command -v aws > /dev/null
+	if [ "${OS_NAME}" == "linux" ]; then
+		command -v pip3 > /dev/null
 		if [ $? -eq 1 ]; then
-	        pip3 --version
-    	    pip3 install awscli --upgrade --user
+			sudo apt -y install jq
+			sudo apt -y install python3
+			sudo apt -y install python3-distutils
+			curl -O https://bootstrap.pypa.io/get-pip.py 2>/dev/null 
+			python3 get-pip.py --user
+			echo "PATH=~/.local/bin:$PATH" >> ~/.bashrc
+			export PATH=~/.local/bin:$PATH
+			pip3 --version
+			pip3 install awscli --upgrade --user
+		else
+			command -v aws > /dev/null
+			if [ $? -eq 1 ]; then
+				pip3 --version
+				pip3 install awscli --upgrade --user
+			fi
 		fi
-    fi
-	rm -rf get-pip.py
+		rm -rf get-pip.py
+	elif [ "${OS_NAME}" == "darwin" ]; then
+		brew install awscli
+	fi
+	
 }
 
 aws-iam-authenticator_dd () {
-	command -v aws-iam-authenticator > /dev/null
-	if [ $? -eq 1 ]; then
-		curl -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.14.6/2019-08-22/bin/linux/amd64/aws-iam-authenticator 2>/dev/null
-		chmod +x ./aws-iam-authenticator
-		mv ./aws-iam-authenticator /usr/local/bin/aws-iam-authenticator
+	if [ "${OS_NAME}" == "linux" ]; then
+		command -v aws-iam-authenticator > /dev/null
+		if [ $? -eq 1 ]; then
+			curl -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.14.6/2019-08-22/bin/linux/amd64/aws-iam-authenticator 2>/dev/null
+			chmod +x ./aws-iam-authenticator
+			mv ./aws-iam-authenticator /usr/local/bin/aws-iam-authenticator
+		fi
+	elif [ "${OS_NAME}" == "darwin" ]; then
+		brew install aws-iam-authenticator
 	fi
+	
 }
 
 nodejs_dd() {
