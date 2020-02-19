@@ -5,3 +5,4 @@ aws-iam-authenticator
 nodejs
 java8
 maven
+aws-vault

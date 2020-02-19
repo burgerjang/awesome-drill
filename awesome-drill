@@ -194,7 +194,16 @@ gradle_dd() {
 	fi
 }
 
-
+aws_valut_dd() {i
+	if [ "${OS_NAME}" == "darwin" ]; then
+		command -v aws-vault > /dev/null
+		if [ $? -eq 1 ]; then
+			brew cask install aws-vault
+		fi
+	else
+		echo "Not MacOS"
+	fi
+}
 
 
 
