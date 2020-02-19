@@ -194,7 +194,7 @@ gradle_dd() {
 	fi
 }
 
-aws-valut_dd() {
+aws-vault_dd() {
 	if [ "${OS_NAME}" == "darwin" ]; then
 		command -v aws-vault > /dev/null
 		if [ $? -eq 1 ]; then
