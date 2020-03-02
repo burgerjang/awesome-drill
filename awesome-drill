@@ -222,7 +222,7 @@ ansible_dd() {
 				pip install --user ansible
 			fi
 		else
-			pip install ansible
+			sudo pip install ansible
 		fi
 
 	else
