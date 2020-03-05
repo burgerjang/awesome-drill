@@ -223,6 +223,7 @@ ansible_dd() {
 			fi
 		else
 			sudo pip install ansible
+			sudo curl -L https://raw.githubusercontent.com/ansible/ansible/devel/examples/ansible.cfg -o /etc/ansible/ansible.cfg
 		fi
 
 	else
